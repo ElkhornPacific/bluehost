@@ -290,12 +290,29 @@ export function AgreementPage() {
           </label>
         ))}
       </fieldset>
-      <div className="boundary-grid">
-        <section><h2><CheckCircle2 /> Can handle automatically</h2><p>Small updates to software your site already uses, like the waiting contact-form update.</p><small>Never new software, a major update, or anything customers can see.</small></section>
-        <section><h2><KeyRound /> Always asks you</h2><p>Visible content or design, form destinations, customer data, purchases, hosting settings, new or removed software, and irreversible changes.</p></section>
-      </div>
-      <SafeguardStrip />
-      <section className="notification-note"><BellRing /><div><strong>We’ll contact you right away when you need to decide something.</strong><p>Everything else goes in your weekly summary. Delivery channels follow your existing Bluehost notification preferences.</p></div></section>
+      <section className="agreement-outcome" aria-live="polite" aria-atomic="true">
+        <div className="agreement-outcome__heading">
+          <div><p className="eyebrow">What happens with this choice</p><h2>{state.agreement === 'automatic' ? 'Routine maintenance can happen automatically' : 'Every website change waits for you'}</h2></div>
+          <StatusPill tone="info">Selected</StatusPill>
+        </div>
+        {state.agreement === 'automatic' ? (
+          <div className="boundary-grid">
+            <section><h3><CheckCircle2 /> Will handle automatically</h3><p>Small updates to software your site already uses, like the waiting contact-form update.</p><small>Never new software, a major update, or anything customers can see.</small></section>
+            <section><h3><KeyRound /> Always asks you</h3><p>Visible content or design, form destinations, customer data, purchases, hosting settings, new or removed software, and irreversible changes.</p></section>
+          </div>
+        ) : (
+          <div className="boundary-grid">
+            <section><h3><Eye /> Keeps watching</h3><p>Availability, important pages, forms, phone links, and software maintenance.</p><small>Monitoring continues without changing your website.</small></section>
+            <section><h3><KeyRound /> Asks before every change</h3><p>Even small routine updates, including the waiting contact-form update.</p><small>No website change runs until you approve it.</small></section>
+          </div>
+        )}
+      </section>
+      <section className="shared-agreement-rules" aria-labelledby="shared-rules-title">
+        <p className="eyebrow">Applies to both choices</p>
+        <h2 id="shared-rules-title">Protection and notifications stay the same</h2>
+        <SafeguardStrip />
+        <section className="notification-note"><BellRing /><div><strong>We’ll contact you right away when you need to decide something.</strong><p>Everything else goes in your weekly summary. Delivery channels follow your existing Bluehost notification preferences.</p></div></section>
+      </section>
       <ActionRow><Link className="button button--quiet" to={`${MM}/setup/coverage`}><ArrowLeft /> Back</Link><Link className="button button--primary" to={`${MM}/setup/review`}>Continue <ArrowRight /></Link></ActionRow>
     </div>
   )

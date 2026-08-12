@@ -43,6 +43,23 @@ describe('Maintenance Manager prototype', () => {
     expect(screen.getByRole('button', { name: /See how Maintenance Manager can help/i })).toBeInTheDocument()
   })
 
+  it('makes the selected working agreement outcome explicit', async () => {
+    const user = userEvent.setup()
+    renderRoute('/ai-agents/maintenance-manager/setup/agreement')
+
+    expect(screen.getByRole('heading', { name: 'Routine maintenance can happen automatically' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Will handle automatically' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Protection and notifications stay the same' })).toBeInTheDocument()
+
+    await user.click(screen.getByRole('radio', { name: /Watch and ask before every change/i }))
+
+    expect(screen.getByRole('heading', { name: 'Every website change waits for you' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Keeps watching' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Asks before every change' })).toBeInTheDocument()
+    expect(screen.queryByRole('heading', { name: 'Will handle automatically' })).not.toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Protection and notifications stay the same' })).toBeInTheDocument()
+  })
+
   it('activates monitoring-only mode without claiming the plugin update was handled', async () => {
     const user = userEvent.setup()
     renderRoute('/ai-agents/maintenance-manager/setup/agreement')
