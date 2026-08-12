@@ -239,7 +239,7 @@ p { line-height: 1.58; }
 .selection-check svg { width: 15px; }
 .selection-row div { display: flex; flex-direction: column; gap: 3px; }
 .selection-row strong { font-size: .86rem; }
-.selection-row span { color: var(--muted); font-size: .74rem; }
+.selection-row div > span { color: var(--muted); font-size: .74rem; }
 .path-list { display: grid; gap: 10px; margin-bottom: 14px; }
 .path-card { display: grid; grid-template-columns: 24px 28px 1fr auto; gap: 12px; align-items: flex-start; padding: 16px; border: 1px solid var(--line); border-radius: 12px; }
 .path-card--review { border-color: #e2b36c; background: #fffbf5; }
