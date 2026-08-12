@@ -47,7 +47,7 @@ describe('Maintenance Manager prototype', () => {
     const user = userEvent.setup()
     renderRoute('/ai-agents/maintenance-manager/setup/agreement')
 
-    expect(screen.getByRole('heading', { name: 'Routine maintenance can happen automatically' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Routine maintenance will happen automatically' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Will handle automatically' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Protection and notifications stay the same' })).toBeInTheDocument()
 

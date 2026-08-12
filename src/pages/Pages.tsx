@@ -292,7 +292,7 @@ export function AgreementPage() {
       </fieldset>
       <section className="agreement-outcome" aria-live="polite" aria-atomic="true">
         <div className="agreement-outcome__heading">
-          <div><p className="eyebrow">What happens with this choice</p><h2>{state.agreement === 'automatic' ? 'Routine maintenance can happen automatically' : 'Every website change waits for you'}</h2></div>
+          <div><p className="eyebrow">What happens with this choice</p><h2>{state.agreement === 'automatic' ? 'Routine maintenance will happen automatically' : 'Every website change waits for you'}</h2></div>
           <StatusPill tone="info">Selected</StatusPill>
         </div>
         {state.agreement === 'automatic' ? (
