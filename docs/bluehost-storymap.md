@@ -13,6 +13,8 @@ This map treats the [assignment](bluehost-project-assignment.md) as the source o
 - Maintenance Manager is included as the universal customer experience at no additional charge. The automatic actions available for a site depend on the backup, restore, maintenance, security, and support capabilities included with that site's existing plan.
 - Maintenance Manager detects and monitors all identifiable customer-contact paths. It reports only the parts of each path it can actually verify.
 - Actual task duration is shown as activity evidence. The prototype does not convert agent runtime into an estimated amount of customer time saved.
+- The deterministic fixture begins on Monday, August 3, 2026, and returns one week later on Monday, August 10, 2026. Important pages are Home, Services, and Contact.
+- The final prototype is a static browser application published at a public HTTPS URL, preferably through GitHub Pages. Reviewers do not install software, download an executable, or run a local server.
 
 ## Journey backbone
 
@@ -61,7 +63,7 @@ Slice labels:
     >
     > Maintenance Manager can watch your site, handle approved routine fixes, and bring you only the decisions that need your judgment.
 
-  - The availability finding shows the two Bluehost check timestamps without inventing a downtime duration.
+  - The availability finding shows `August 3, 2026 · 8:15 AM` and `August 3, 2026 · 8:20 AM` without inventing a downtime duration.
   - The waiting work is one eligible minor update to the already-installed contact-form plugin.
   - The card does not imply that Maintenance Manager has already monitored, tested, or changed the site.
   - The action deep-links to `AI Agents / Maintenance Manager`; it does not send the customer to a general agent catalog.
@@ -162,10 +164,10 @@ Slice labels:
     - **General contact:** `Homepage → Contact → Send message`
     - **Call the business:** Phone links in the header and contact page.
 
-  - For forms, Maintenance Manager can separately verify that the page loads, a clearly labeled synthetic submission succeeds, the site records it, and an email notification is delivered when Bluehost has delivery evidence.
+  - For forms, Maintenance Manager can separately verify that the page loads, a clearly labeled test submission succeeds, the site records it, and an email notification is delivered when Bluehost has delivery evidence.
   - For phone links, it verifies that the expected number is present and the link can launch a phone action. It does not place a call or claim the business answered.
-  - Synthetic form submissions are identified and removed or archived so they do not pollute customer records.
-  - Maintenance Manager also proposes availability, important-page, and software-maintenance monitoring.
+  - The underlying synthetic form submissions are identified and removed or archived so they do not pollute customer records.
+  - Maintenance Manager also proposes availability, software-maintenance monitoring, and hourly checks of the Home, Services, and Contact pages.
 
 - **What the customer sees:**
 
@@ -216,6 +218,7 @@ Slice labels:
     - **Watch and ask before every change:** Perform the same monitoring but make no website change without approval.
 
   - Eligible automatic work is limited to security, patch, and minor-version updates for WordPress and already-installed plugins or themes, plus cache clearing when required afterward.
+  - Customer-facing permission copy describes that boundary as “small updates to software your site already uses, like the waiting contact-form update.” Precise version terminology appears only in optional technical detail.
   - Maintenance Manager always asks before major-version updates; installing, replacing, or removing software; changing hosting configuration; changing visible content, design, customer data, or form destinations; purchasing anything; or making an irreversible change.
   - Every change is backed up and verified. Failed verification triggers rollback. If rollback cannot restore a safe state, Maintenance Manager automatically opens a Bluehost support ticket.
   - Immediate notifications are reserved for matters requiring owner judgment or input. Routine work, successful recovery, and support tickets that need no owner action appear in the Portal and weekly summary.
@@ -276,7 +279,10 @@ Slice labels:
     3. Backs up the site and completes eligible disclosed maintenance immediately when the recommended agreement was chosen.
     4. Verifies the site and affected customer-contact paths.
     5. Creates the first decision-center and Activity entries.
-    6. Reports any access or test limitation rather than falsely declaring success.
+     6. Reports any access or test limitation rather than falsely declaring success.
+
+  - Under `Watch and ask before every change`, the same monitoring and customer-path checks begin, but the plugin update remains under `Needs your decision`; no backup or change runs until approval.
+  - If an initial check cannot run, setup remains active but incomplete. The customer sees which coverage is unavailable and can retry, correct the connection, or ask Bluehost support for help.
 
 - **What the customer sees:**
 
@@ -338,7 +344,9 @@ Slice labels:
   - **In progress, when applicable:** “Verifying the result,” “Restoring backup,” or “Bluehost support is handling this · Ticket #BH-10482.”
   - **Needs your decision:** “Where should new quote requests go?”
   - **Handled for you:** “Contact-form plugin updated; site and affected paths passed verification.”
-  - **Watching for you:** Availability, important pages, both forms, and phone links, each with its latest successful check.
+  - **Watching for you:** Availability, Home, Services, Contact, both forms, and phone links, each with its latest successful check.
+  - Availability also closes the discovery loop: “All availability checks have completed since monitoring began. The two missed Bluehost checks at 8:15 AM and 8:20 AM have not recurred; they did not establish downtime.”
+  - Under `Watch and ask before every change`, the plugin update appears under `Needs your decision`, `Handled for you` is empty, and the same monitoring evidence appears under `Watching for you`.
   - A visible distinction between healthy, completed, and blocked work.
 
 - **Trust or confidence requirement:**
@@ -379,6 +387,7 @@ Slice labels:
     - Approval changes only the quote-form destination.
     - It will back up the configuration, make the change, submit a test inquiry, and restore the previous configuration if verification fails.
   - If the owner selects `Remind me in 7 days`, the current destination remains unchanged, the limitation remains visible under `Needs your decision`, and no repeated immediate notification is sent unless evidence shows that requests are failing or being lost.
+  - If the owner chooses another address, Maintenance Manager runs the same backup, change, submission, recording, and delivery checks. If delivery cannot be confirmed, it restores the current destination and reports “submitted and recorded; email delivery could not be confirmed.”
 
 - **What the customer sees:**
 
@@ -474,13 +483,18 @@ Slice labels:
     - All detected customer-contact paths and their latest verifiable results.
     - Maintenance items completed and verified.
     - Decisions resolved.
-    - Owner decisions and troubleshooting steps required.
+     - Owner decisions and troubleshooting steps required.
+
+  - The happy-path summary reports two completed changes and one resolved owner decision.
+  - If the owner selected `Remind me in 7 days`, the one-week summary and Results show one completed change and the quote-delivery decision as `Reminder set · Due today`; they never imply that the destination changed.
+  - If the owner activated `Watch and ask before every change` and approved nothing, Results show no completed changes and two pending decisions: the plugin update and the quote-delivery destination.
+  - Availability evidence states that checks have completed since activation and the two pre-activation missed checks have not recurred. Activity preserves the original finding and its later disposition.
 
   - One week after activation, the existing Bluehost notification system sends a weekly email summary that deep-links to the Results view.
   - Monitoring follows these customer-facing frequencies for Harbor & Pine's plan:
 
     - Website availability every five minutes.
-    - Important pages hourly.
+    - Home, Services, and Contact hourly.
     - Form submission and recording daily and after relevant maintenance.
     - Email delivery after setup, after relevant changes, and periodically.
     - Software maintenance status daily.
@@ -492,8 +506,9 @@ Slice labels:
   - “Your website is available.”
   - “Your request-a-quote and general contact forms passed their latest tests.”
   - “Your phone links point to the expected business number.”
-  - “Two maintenance items completed and checked.”
-  - “One owner decision requested · No troubleshooting steps required from you.”
+  - Happy path: “Two changes completed and checked.”
+  - Happy path: “One owner decision resolved · No troubleshooting steps required from you.”
+  - Deferred path: “One change completed and checked · One decision is due today.”
   - Actual duration appears on completed tasks, not as an aggregate business outcome.
   - The time period and latest-check timestamps.
 
@@ -525,7 +540,7 @@ The smallest credible prototype is one continuous journey of approximately nine 
 
 3. **What Maintenance Manager will watch**
 
-   - Selected site, availability, important pages, maintenance status, and all three detected customer-contact paths.
+   - Selected site, availability, Home, Services, Contact, maintenance status, and all three detected customer-contact paths.
 
 4. **Working agreement**
 
@@ -559,9 +574,9 @@ The prototype should use Bluehost's current documented left-side Portal navigati
 
 - **Needs your attention:** The Maintenance Manager quote-delivery decision.
 - **Working for you:** Maintenance Manager for `harborandpinelandscaping.com`, with current state, latest result, and decision count.
-- **Available to help:** Nonfunctional `Explore` cards for AI Front Desk Agent and AI Store.
+- **Available to help:** Descriptive, non-interactive cards for AI Front Desk Agent and AI Store.
 
-The main journey does not enter the other agent cards.
+The main journey does not enter the other agent cards. Before activation, Maintenance Manager appears under `Available to help` and links to its introduction. After activation, `Needs your attention` and `Working for you` derive from current prototype state so resolved decisions do not reappear as pending.
 
 ## Proposed happy-path scenario
 
@@ -607,6 +622,7 @@ At least one recovery branch should be clickable; the rest can be represented as
 
 - **Automatic maintenance fails verification — clickable recovery branch**
 
+  - This scenario isolates the failed plugin update. The separate quote-delivery decision does not appear before the branch ends at the support handoff.
   - The minor plugin update leaves the website available but causes the request-a-quote test to fail.
   - Maintenance Manager restores the backup, reruns the checks, and verifies that the website and customer-contact paths work normally again.
   - The update remains unresolved and moves to `Needs your decision`; Activity records the failed verification and successful rollback.

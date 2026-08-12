@@ -24,12 +24,14 @@ Maintenance Manager coordinates that fragmented system through:
 - Plan-aware coordination of backup, eligible maintenance, verification, rollback, and support escalation.
 - One decision center showing what needs judgment, what is in progress, what was handled, and what is being watched.
 - Activity evidence showing the authority used, checks performed, outcome, timestamps, and actual task duration.
-- Weekly results connecting completed work to current availability, successful customer-path tests, and owner effort required.
+- Weekly results connecting actual completed work, unresolved decisions, current availability, successful customer-path tests, and owner effort required.
 
 Maintenance Manager offers two working agreements:
 
 - **Watch and handle routine maintenance — Recommended:** Available only when the site has sufficient backup and restore protection for safe recovery.
 - **Watch and ask before every change:** Monitoring remains active, but every website change requires approval.
+
+Customer-facing permission copy describes eligible automatic work as small updates to software the site already uses, using the waiting contact-form update as the example. Patch and version terminology remains optional technical detail.
 
 It never silently purchases or enables a paid service. It does not manage stores, marketing, lead handling, customer-service interactions, or the customer's broader business operations.
 
@@ -68,7 +70,9 @@ The research supports Maintenance Manager as a product direction worth testing, 
 
 ### Prototype focus
 
-The prototype follows the owner of Harbor & Pine Landscaping and one selected site, `harborandpinelandscaping.com`. Existing Bluehost checks surface one eligible plugin update and two missed availability checks. The owner confirms all detected customer-contact paths, chooses a site-specific working agreement, and activates Maintenance Manager. The agent performs the disclosed eligible update, tests its work, recommends a business-controlled change to quote-request delivery, and returns one week later with current evidence in a weekly summary and Results view.
+The prototype follows the owner of Harbor & Pine Landscaping and one selected site, `harborandpinelandscaping.com`. Existing Bluehost checks surface one eligible plugin update and two missed availability checks. The owner confirms the Home, Services, and Contact pages plus all detected customer-contact paths, chooses a site-specific working agreement, and activates Maintenance Manager. On the recommended happy path, the agent performs the disclosed eligible update, tests its work, recommends a business-controlled change to quote-request delivery, and returns one week later with current evidence in a weekly summary and Results view. Availability reporting explicitly closes the discovery finding by showing that the earlier missed checks have not recurred without claiming they proved downtime.
+
+Supporting state variants remain truthful when the owner chooses monitoring-only mode or defers the quote-delivery decision. They report only work actually completed and keep unresolved decisions visible rather than converging on the happy-path results.
 
 The primary exception branch shows a failed customer-path verification followed by successful rollback. Maintenance Manager recommends Bluehost support review and creates a pre-populated ticket when the owner accepts. A failed rollback would open a support ticket automatically.
 
