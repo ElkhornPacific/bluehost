@@ -16,6 +16,18 @@ function renderRoute(route: string) {
 }
 
 describe('Maintenance Manager prototype', () => {
+  it('explains the complete maintenance loop in plain language', () => {
+    renderRoute('/ai-agents/maintenance-manager')
+
+    expect(screen.getByText(/Maintenance Manager watches your website/)).toBeInTheDocument()
+    expect(screen.getByText('Handle approved work')).toBeInTheDocument()
+    expect(screen.getByText('Ask you to decide')).toBeInTheDocument()
+    expect(screen.getByText('Follows the permissions you choose')).toBeInTheDocument()
+    expect(screen.getByText('Backs up before changes')).toBeInTheDocument()
+    expect(screen.getByRole('img', { name: /asks you to decide when approval is needed/i })).toBeInTheDocument()
+    expect(screen.queryByText('One clear working agreement')).not.toBeInTheDocument()
+  })
+
   it('starts with attributed Bluehost findings and supports reversible dismissal', async () => {
     const user = userEvent.setup()
     renderRoute('/portal')

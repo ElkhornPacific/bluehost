@@ -174,18 +174,22 @@ export function IntroPage() {
         <div className="intro-hero__copy">
           <StatusPill tone="info">AI agent · Included with Bluehost</StatusPill>
           <h1>Take routine website maintenance off your to-do list.</h1>
-          <p>Maintenance Manager watches one website, handles the routine work you approve, tests its work, and asks when a decision needs your judgment.</p>
+          <p>Maintenance Manager watches your website, handles the routine work you approve, tests its work, and asks when a decision needs your judgment.</p>
           <ActionRow>
             <Link className="button button--primary" to={`${MM}/setup/coverage`}>Set up Maintenance Manager <ArrowRight aria-hidden="true" /></Link>
             <Button variant="secondary" onClick={() => setDrawerOpen(true)}>How it works</Button>
           </ActionRow>
           <small className="included-note"><BadgeCheck aria-hidden="true" /> Included at no additional charge. Automatic actions depend on capabilities already included with this site’s plan.</small>
         </div>
-        <div className="intro-hero__visual" aria-label="Maintenance Manager safeguards">
-          <div className="orbit-card orbit-card--main"><Bot /><strong>Maintenance Manager</strong><span>One clear working agreement</span></div>
-          <div className="orbit-card orbit-card--a"><Eye /><span>Watch</span></div>
-          <div className="orbit-card orbit-card--b"><ShieldCheck /><span>Back up</span></div>
-          <div className="orbit-card orbit-card--c"><MonitorCheck /><span>Verify</span></div>
+        <div className="intro-hero__visual" role="img" aria-label="Maintenance Manager watches your website, handles approved work, verifies the result, asks you to decide when approval is needed, and backs up before changes.">
+          <div className="hero-process__core"><Bot aria-hidden="true" /><div><strong>Maintenance Manager</strong><span>Follows the permissions you choose</span></div></div>
+          <div className="hero-process__steps" aria-hidden="true">
+            <div className="hero-process__step"><Eye /><span>Watch</span></div>
+            <div className="hero-process__step"><Wrench /><span>Handle approved work</span></div>
+            <div className="hero-process__step"><MonitorCheck /><span>Verify the result</span></div>
+            <div className="hero-process__step hero-process__step--decision"><BellRing /><span>Ask you to decide</span></div>
+          </div>
+          <div className="hero-process__safeguard" aria-hidden="true"><ShieldCheck /><span>Backs up before changes</span></div>
         </div>
       </div>
 
