@@ -148,10 +148,6 @@ p { line-height: 1.58; }
 .finding-list li > svg { width: 18px; flex: 0 0 auto; margin-top: 1px; color: var(--warning); }
 .finding-list span { display: flex; flex-direction: column; gap: 3px; }
 .finding-list small { color: var(--muted); font-size: .8rem; }
-.evidence-details { margin: 14px 0 18px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.evidence-details summary { padding: 11px 0; color: var(--blue-dark); font-size: .82rem; font-weight: 740; cursor: pointer; }
-.evidence-details div { padding: 2px 0 11px 20px; color: var(--muted); font-size: .78rem; }
-.evidence-details p { margin-bottom: 5px; }
 .dismissed-card { display: flex; align-items: center; gap: 14px; margin-top: 22px; padding: 20px 22px; border: 1px solid var(--line); border-radius: var(--radius); background: white; }
 .dismissed-card > svg { color: var(--success); }
 .dismissed-card > div { display: flex; flex: 1; flex-direction: column; gap: 3px; }
@@ -204,7 +200,7 @@ p { line-height: 1.58; }
 .orbit-card--a { top: 16px; left: 16px; }
 .orbit-card--b { top: 40px; right: 2px; }
 .orbit-card--c { right: 10px; bottom: 12px; }
-.current-findings { display: grid; grid-template-columns: 1.1fr .9fr .9fr; gap: 16px; align-items: center; margin-top: 22px; padding: 22px 26px; border: 1px solid var(--line); border-radius: var(--radius); background: white; }
+.current-findings { display: grid; grid-template-columns: 1.2fr .8fr; gap: 16px; align-items: center; margin-top: 22px; padding: 22px 26px; border: 1px solid var(--line); border-radius: var(--radius); background: white; }
 .current-findings h2 { margin-bottom: 5px; font-size: 1.1rem; }
 .current-findings p { margin: 0; color: var(--muted); font-size: .8rem; }
 .finding-mini { display: flex; align-items: center; gap: 11px; padding: 13px; border-radius: 11px; background: var(--surface-soft); }
@@ -388,9 +384,6 @@ p { line-height: 1.58; }
 .results-metrics div { display: flex; flex-direction: column; gap: 4px; padding: 4px 16px; text-align: center; }
 .results-metrics strong { font-size: 1.7rem; }
 .results-metrics span { color: #d8eee6; font-size: .68rem; line-height: 1.35; }
-.availability-disposition { display: flex; align-items: flex-start; gap: 11px; margin-top: 16px; padding: 14px 16px; border: 1px solid #cbd7e9; border-radius: 11px; background: #f8fafd; }
-.availability-disposition svg { width: 18px; flex: 0 0 auto; color: var(--blue); }
-.availability-disposition p { margin: 0; color: var(--muted); font-size: .78rem; }
 .results-section { margin-top: 20px; padding: 22px; border: 1px solid var(--line); border-radius: var(--radius); background: white; }
 .results-section__heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 14px; margin-bottom: 18px; }
 .results-section__heading h2 { margin: 0; font-size: 1.08rem; }

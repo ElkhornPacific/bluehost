@@ -14,7 +14,7 @@ Maintenance Manager is a focused AI agent that watches one selected site, perfor
 
 The prototype prioritizes the complete trust loop:
 
-- Contextual discovery tied to a waiting contact-form update and two missed Bluehost availability checks.
+- Contextual discovery tied to one current, actionable contact-form update.
 - A three-step setup that confirms important pages and all detected customer-contact paths, establishes one of two working agreements, and previews exact immediate work.
 - Truthful work states separating decisions, active work, completed and verified work, and current monitoring evidence.
 - One business-controlled quote-delivery decision with recommendation, deferral, and alternate-address testing.
@@ -29,7 +29,7 @@ The experience treats permission as a working agreement, not a technical matrix.
 
 Customer-facing copy defines automatic work by example: small updates to software the site already uses, such as the waiting contact-form update. New software, major updates, visible content, design, form destinations, business settings, purchases, customer data, hosting configuration, and irreversible changes always require approval. Nothing is silently purchased or enabled.
 
-Verification is staged and explicit. A form test reports submission, website recording, and confirmed delivery separately. Work moves to `Handled for you` only after the relevant checks succeed. Deferral never becomes approval. An alternate email is never kept unless delivery is confirmed. A successful rollback restores safety but leaves the original update unresolved. The original missed availability checks remain in Activity and receive a later disposition rather than disappearing into a generic healthy state.
+Verification is staged and explicit. A form test reports submission, website recording, and confirmed delivery separately. Work moves to `Handled for you` only after the relevant checks succeed. Deferral never becomes approval. An alternate email is never kept unless delivery is confirmed. A successful rollback restores safety but leaves the original update unresolved. Availability monitoring begins after activation and reports current evidence; isolated or inconclusive monitoring telemetry is absorbed by Bluehost rather than transferred to the owner as an unexplained problem.
 
 Progress changes use a live region, every control is keyboard reachable, visible focus is preserved, and reduced-motion preferences shorten deterministic progress without removing status communication. Responsive layouts preserve the desktop information hierarchy at 1024 pixels and collapse the Portal navigation on smaller screens.
 

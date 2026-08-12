@@ -52,18 +52,16 @@ Slice labels:
 
 - **Important system response:**
 
-  - Existing Bluehost checks, not an inactive agent, produce the two findings.
-  - Before displaying the card, Bluehost rechecks the evidence so a stale issue is not presented as current.
+  - Existing Bluehost checks, not an inactive agent, identify one current, actionable finding.
+  - Before displaying the card, Bluehost rechecks the update status so stale work is not presented as current.
   - The Portal displays:
 
-    > **Harbor & Pine Landscaping has two items that need attention**
+    > **Harbor & Pine Landscaping has one item that needs attention**
     >
     > - One routine website update is waiting.
-    > - Your homepage missed two Bluehost availability checks this week.
     >
     > Maintenance Manager can watch your site, handle approved routine fixes, and bring you only the decisions that need your judgment.
 
-  - The availability finding shows `August 3, 2026 · 8:15 AM` and `August 3, 2026 · 8:20 AM` without inventing a downtime duration.
   - The waiting work is one eligible minor update to the already-installed contact-form plugin.
   - The card does not imply that Maintenance Manager has already monitored, tested, or changed the site.
   - The action deep-links to `AI Agents / Maintenance Manager`; it does not send the customer to a general agent catalog.
@@ -71,7 +69,7 @@ Slice labels:
 - **What the customer sees:**
 
   - A Portal card tied to their named website.
-  - Two concise findings, their recency, and why they could matter.
+  - One concise finding, its recency, and why it matters.
   - A clear `See how Maintenance Manager can help` action.
   - A secondary `Not now` action.
   - The global navigation indicates **AI Agents** as the selected category after the customer follows the action.
@@ -79,7 +77,8 @@ Slice labels:
 - **Trust or confidence requirement:**
 
   - The trigger must not use vague fear or manufactured urgency.
-  - Every claimed issue needs a source, timestamp, and understandable consequence.
+  - Every claimed issue needs a source, timestamp, understandable consequence, and meaningful next step.
+  - Inconclusive monitoring telemetry is not presented as a customer-facing problem. Availability warnings require a confirmed condition, current status, and clear ownership of the next action.
   - The customer must be able to distinguish Bluehost's existing observations from agent actions.
 
 - **Assignment requirement addressed:**
@@ -120,7 +119,7 @@ Slice labels:
 
 - **What the customer sees:**
 
-  - The two findings from the Portal, now with clearer explanations.
+  - The waiting update from the Portal, now with a clearer explanation.
   - A compact “What it watches / What it can handle / What always needs you” preview.
   - The safeguards: backup, test, verify, and restore if verification fails.
   - “Maintenance Manager is included with your Bluehost subscription at no additional charge,” followed by a plain-language summary of the capabilities already available for this site.
@@ -345,7 +344,7 @@ Slice labels:
   - **Needs your decision:** “Where should new quote requests go?”
   - **Handled for you:** “Contact-form plugin updated; site and affected paths passed verification.”
   - **Watching for you:** Availability, Home, Services, Contact, both forms, and phone links, each with its latest successful check.
-  - Availability also closes the discovery loop: “All availability checks have completed since monitoring began. The two missed Bluehost checks at 8:15 AM and 8:20 AM have not recurred; they did not establish downtime.”
+  - Availability is a proactive monitoring benefit activated through the working agreement: “Your website is available · Last checked 10:50 AM · Every five minutes.”
   - Under `Watch and ask before every change`, the plugin update appears under `Needs your decision`, `Handled for you` is empty, and the same monitoring evidence appears under `Watching for you`.
   - A visible distinction between healthy, completed, and blocked work.
 
@@ -488,7 +487,7 @@ Slice labels:
   - The happy-path summary reports two completed changes and one resolved owner decision.
   - If the owner selected `Remind me in 7 days`, the one-week summary and Results show one completed change and the quote-delivery decision as `Reminder set · Due today`; they never imply that the destination changed.
   - If the owner activated `Watch and ask before every change` and approved nothing, Results show no completed changes and two pending decisions: the plugin update and the quote-delivery destination.
-  - Availability evidence states that checks have completed since activation and the two pre-activation missed checks have not recurred. Activity preserves the original finding and its later disposition.
+  - Availability evidence states when the latest check completed and how often Maintenance Manager checks the site.
 
   - One week after activation, the existing Bluehost notification system sends a weekly email summary that deep-links to the Results view.
   - Monitoring follows these customer-facing frequencies for Harbor & Pine's plan:
@@ -532,7 +531,7 @@ The smallest credible prototype is one continuous journey of approximately nine 
 
 1. **Existing Bluehost Portal**
 
-   - Harbor & Pine's one waiting update and two missed availability checks, attributed to Bluehost.
+   - Harbor & Pine's one waiting update, attributed to Bluehost.
 
 2. **Maintenance Manager introduction**
 
@@ -580,7 +579,7 @@ The main journey does not enter the other agent cards. Before activation, Mainte
 
 ## Proposed happy-path scenario
 
-The owner of Harbor & Pine Landscaping signs into the Bluehost Portal. Existing Bluehost checks report one eligible contact-form plugin update and two missed homepage availability checks for `harborandpinelandscaping.com`.
+The owner of Harbor & Pine Landscaping signs into the Bluehost Portal. Existing Bluehost checks report one eligible contact-form plugin update for `harborandpinelandscaping.com`.
 
 The owner follows the contextual trigger directly to `AI Agents / Maintenance Manager`. Maintenance Manager discloses that it is an included AI agent, explains its bounded job, and shows that this site's plan supports managed updates, backup and restore, monitoring, and support escalation.
 
@@ -674,7 +673,7 @@ At least one recovery branch should be clickable; the rest can be represented as
 - **Information architecture:** Bluehost's current left-side Portal navigation includes **AI Agents** as the top-level category. Contextual discovery deep-links straight to Maintenance Manager. The supporting AI Agents home is status-first, with active work ahead of optional exploration.
 - **AI disclosure:** Explain in one sentence that Maintenance Manager is an AI agent, with optional plain-language safeguard details. Do not require an AI-education flow or use anthropomorphic positioning.
 - **Prototype customer:** Harbor & Pine Landscaping uses `harborandpinelandscaping.com`. Activation and authority are site-specific.
-- **Discovery evidence:** Existing Bluehost checks find one eligible plugin update and two missed homepage availability checks. Active customer-path testing begins only after authorization.
+- **Discovery evidence:** Existing Bluehost checks find one eligible plugin update. Availability and active customer-path testing begin only after authorization.
 - **Contact-path coverage:** Detect and monitor every identifiable customer-contact path. The prototype covers request-a-quote, general contact, and click-to-call, while demonstrating the full staged test for the quote form.
 - **Verification language:** Report form submission, website recording, and confirmed delivery separately. Claim delivery only when Bluehost has evidence.
 - **Automatic-action boundary:** Automatic work is limited to eligible reversible security, patch, and minor updates for existing software. Major, new, removed, customer-visible, business-sensitive, purchased, configuration-level, or irreversible work always requires approval.
@@ -702,7 +701,8 @@ At least one recovery branch should be clickable; the rest can be represented as
 
 - **The hierarchy must not weaken relevance.** AI Agents can organize multiple focused agents, but it should not make customers browse a catalog or learn agent terminology before a relevant problem can take them to Maintenance Manager.
 - **The experience cannot imply universal execution entitlements.** Maintenance Manager can be universally included while backup, restore, malware remediation, monitoring, and support capabilities vary by site and plan.
-- **The discovery trigger still depends on real signals.** “Two items need attention” will feel manipulative if Bluehost cannot supply and recheck the stated findings and timestamps.
+- **The discovery trigger still depends on a real signal.** The waiting update must be current, eligible, and rechecked before Bluehost presents it as needing attention.
+- **Monitoring uncertainty belongs to Bluehost, not the owner.** Isolated or inconclusive availability telemetry should be rechecked silently. Surface an availability problem only when Bluehost can describe a confirmed condition, its current status, and who owns the next action.
 - **“Watching” is not automatically valuable.** It becomes credible only when paired with what is covered, the latest check, and any coverage gaps.
 - **Successful checks are not equivalent to business success.** The prototype can truthfully claim that a customer-contact path worked; it cannot claim more leads or revenue without evidence.
 - **Setup could easily become configuration-heavy.** The primary flow should use one recommended working agreement with clear boundaries, not a dashboard of granular technical toggles.

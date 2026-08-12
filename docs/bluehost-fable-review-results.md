@@ -3,6 +3,8 @@
 > Fable review results, 2026-08-12. Produced per [bluehost-fable-testing-prompt.md](bluehost-fable-testing-prompt.md).
 > Inputs: [assignment](bluehost-project-assignment.md) (source of truth), [value proposition](bluehost-value-prop.md), [story map](bluehost-storymap.md), [prototype specification](bluehost-prototype-spec.md).
 
+> **Historical note:** A subsequent product review removed the inconclusive missed-availability-check fixture from the prototype and current requirements. Finding M2 below documents the earlier reviewed state and is preserved as part of the review record; it no longer describes the implemented discovery experience.
+
 ## 1. Overall assessment
 
 The materials define a coherent, credible prototype — unusually disciplined for a take-home. One agent, one site, one bounded promise, explicit exclusions, and trust rules that are testable rather than aspirational. All three assignment phases are present and load-bearing, and the assignment's implicit comprehension tests for a nontechnical owner mostly pass: what is happening (work states with evidence and timestamps), what the system may do (two agreements with an explicit always-ask list), what needs owner judgment (a genuine business decision about quote delivery), and what happens when work fails (rollback branch plus automatic support escalation) are all clear.

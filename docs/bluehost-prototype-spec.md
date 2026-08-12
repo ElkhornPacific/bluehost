@@ -108,10 +108,9 @@ Both agreements activate Maintenance Manager.
 Existing Bluehost checks found:
 
 - One eligible minor update to the already-installed contact-form plugin.
-- Two missed homepage availability checks at `August 3, 2026 · 8:15 AM` and `August 3, 2026 · 8:20 AM`.
-- The two timestamps are visible, but the prototype does not invent a downtime duration.
 
 Maintenance Manager has not yet monitored, tested, or changed the site.
+Availability monitoring begins only after activation. The discovery experience does not present isolated or inconclusive monitoring telemetry as a customer-facing problem.
 
 ### Important pages
 
@@ -190,15 +189,14 @@ Use the current documented Bluehost Portal structure:
 
 **Required content**
 
-> **Harbor & Pine Landscaping has two items that need attention**
+> **Harbor & Pine Landscaping has one item that needs attention**
 >
 > - One routine website update is waiting.
-> - Your homepage missed two Bluehost availability checks this week.
 >
 > Maintenance Manager can watch your site, handle approved routine fixes, and bring you only the decisions that need your judgment.
 
-- Show both availability-check timestamps in an expandable evidence area.
-- Attribute the findings to Bluehost, not Maintenance Manager.
+- Attribute the finding to Bluehost, not Maintenance Manager.
+- Show when Bluehost last confirmed that the update is still waiting.
 
 **Interactions**
 
@@ -208,7 +206,8 @@ Use the current documented Bluehost Portal structure:
 **Trust requirement**
 
 - Do not imply that an inactive agent has already watched or tested the site.
-- Do not manufacture urgency or claim a measured downtime duration.
+- Do not manufacture urgency or present inconclusive monitoring telemetry as an owner problem.
+- A customer-facing availability warning is out of scope unless the system can state a confirmed condition, current status, and clear owner for the next action.
 
 ### Screen 2: Maintenance Manager introduction
 
@@ -220,7 +219,7 @@ Use the current documented Bluehost Portal structure:
 
 - Headline: `Take routine website maintenance off your to-do list.`
 - Lightweight disclosure that Maintenance Manager is an AI agent.
-- The two findings carried forward from the Portal.
+- The waiting update carried forward from the Portal.
 - Four short explanations:
   - What it watches.
   - What it can handle.
@@ -360,13 +359,13 @@ Use the current documented Bluehost Portal structure:
 - **Handled for you:** Contact-form plugin updated; site and affected paths passed verification.
 - **Watching for you:** Availability, Home, Services, Contact, request-a-quote, general contact, phone links, and software maintenance.
 - Every watching item shows latest evidence and expected frequency.
-- The availability item includes: `All availability checks have completed since monitoring began. The two missed Bluehost checks at 8:15 AM and 8:20 AM have not recurred; they did not establish downtime.`
+- The availability item includes: `The latest availability check completed successfully · Last checked 10:50 AM · Every five minutes.`
 
 **Required monitoring-only variant**
 
 - **Needs your decision:** The waiting contact-form update and quote-request delivery confirmation.
 - **Handled for you:** Empty state explaining that Maintenance Manager is waiting for approval before making changes.
-- **Watching for you:** The same current monitoring coverage and availability disposition as the recommended path.
+- **Watching for you:** The same current monitoring coverage and latest availability evidence as the recommended path.
 - This supporting branch ends on the truthful Overview. Do not build a separate plugin-approval journey for the take-home.
 
 **Interactions**
@@ -442,7 +441,7 @@ Treat this screen as a compact notification preview, not a separate management s
 - Subject: `Harbor & Pine's weekly Maintenance Manager summary`
 - Selected site and seven-day period.
 - Website currently available.
-- Availability checks have completed since activation; the two pre-activation missed checks have not recurred and did not establish downtime.
+- The latest availability check passed at `10:50 AM`; Maintenance Manager checks every five minutes.
 - Request-a-quote and general contact forms passed their latest tests.
 - Phone links point to the expected business number.
 - Two changes completed and verified.
@@ -480,7 +479,7 @@ If the owner selected `Remind me in 7 days`, show:
 - One resolved owner decision.
 - No troubleshooting steps required from the owner.
 - Links to the two completed Activity records with actual duration.
-- Availability disposition: checks completed since activation; the two missed checks at 8:15 AM and 8:20 AM did not recur and did not establish downtime.
+- Website availability reports the latest successful check and expected five-minute frequency.
 
 **Required state variants**
 
@@ -584,7 +583,7 @@ If rollback cannot restore a safe state, Maintenance Manager automatically opens
 
 Activity is one history across findings, authorization, automatic work, owner decisions, verification, recovery, support escalation, and notifications.
 
-The happy-path history includes the original two missed Bluehost availability checks and a later disposition event: `Availability monitoring established · No additional missed checks since activation.` Its detail states that the original missed checks did not establish downtime.
+The happy-path history begins availability evidence only after activation with: `Availability monitoring established · Latest check completed successfully.` It records the site-specific agreement and expected five-minute frequency.
 
 Each event should answer:
 
@@ -708,7 +707,7 @@ These assumptions should appear in the written brief or prototype notes, not as 
 ### Trust and accuracy
 
 - Pre-activation findings are attributed to Bluehost.
-- The two missed availability checks receive an explicit later disposition in Overview, Activity, Weekly Summary, and Results.
+- Inconclusive availability telemetry is never presented as a customer-facing problem. Availability surfaces show only current, actionable status and fresh evidence.
 - Maintenance Manager's authority is site-specific and visible.
 - Plan readiness is disclosed before automatic work is offered.
 - Automatic and always-ask boundaries are explicit.

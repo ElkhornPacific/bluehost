@@ -100,20 +100,11 @@ export function PortalPage() {
         <section className="attention-card" aria-labelledby="attention-title">
           <div className="attention-card__icon"><Sparkles aria-hidden="true" /></div>
           <div className="attention-card__content">
-            <div className="attention-card__source"><span>Found by Bluehost</span><span>Rechecked 9:48 AM</span></div>
-            <h2 id="attention-title">Harbor &amp; Pine Landscaping has two items that need attention</h2>
+            <div className="attention-card__source"><span>Found by Bluehost</span><span>Checked 9:48 AM</span></div>
+            <h2 id="attention-title">Harbor &amp; Pine Landscaping has one item that needs attention</h2>
             <ul className="finding-list">
               <li><CircleAlert aria-hidden="true" /><span><strong>One routine website update is waiting.</strong><small>Your contact-form software has a small update ready.</small></span></li>
-              <li><Clock3 aria-hidden="true" /><span><strong>Your homepage missed two Bluehost availability checks this week.</strong><small>We rechecked it and your homepage is available now.</small></span></li>
             </ul>
-            <details className="evidence-details">
-              <summary>See Bluehost check details</summary>
-              <div>
-                <p><strong>Missed check 1:</strong> August 3, 2026 · 8:15 AM</p>
-                <p><strong>Missed check 2:</strong> August 3, 2026 · 8:20 AM</p>
-                <p>These missed checks do not establish how long the site was unavailable—or whether it was unavailable at all.</p>
-              </div>
-            </details>
             <p>Maintenance Manager can watch your site, handle approved routine fixes, and bring you only the decisions that need your judgment.</p>
             <ActionRow>
               <Button onClick={() => navigate(MM)}>See how Maintenance Manager can help <ArrowRight aria-hidden="true" /></Button>
@@ -199,9 +190,8 @@ export function IntroPage() {
       </div>
 
       <section className="current-findings">
-        <div><p className="eyebrow">Why you’re seeing this</p><h2>Two recent Bluehost findings</h2><p>Maintenance Manager has not changed or actively tested your site yet.</p></div>
+        <div><p className="eyebrow">Why you’re seeing this</p><h2>One current Bluehost finding</h2><p>Maintenance Manager has not changed or actively tested your site yet.</p></div>
         <div className="finding-mini"><Wrench /><span><strong>Routine update waiting</strong><small>Contact-form software</small></span></div>
-        <div className="finding-mini"><Clock3 /><span><strong>Two checks missed</strong><small>Homepage · 8:15 and 8:20 AM</small></span></div>
       </section>
 
       <section className="promise-grid" aria-label="Maintenance Manager boundaries">
@@ -421,7 +411,7 @@ export function OverviewPage() {
       </WorkSection>
 
       <WorkSection title="Watching for you" count={6} tone="info" icon={<Eye />}>
-        <WorkCard title="Website availability" description="All availability checks have completed since monitoring began. The two missed Bluehost checks at 8:15 AM and 8:20 AM have not recurred; they did not establish downtime." meta="Available · Last checked 10:50 AM · Every 5 minutes" status={<StatusPill tone="success">Current</StatusPill>} />
+        <WorkCard title="Website availability" description="The latest availability check completed successfully." meta="Available · Last checked 10:50 AM · Every 5 minutes" status={<StatusPill tone="success">Current</StatusPill>} />
         <div className="watching-grid">
           {watchingCards.map((card) => <WorkCard key={card.title} {...card} status={<StatusPill tone="success">Current</StatusPill>} />)}
         </div>
@@ -505,8 +495,7 @@ export function ActivityPage() {
   const { state } = usePrototype()
   const rollback = state.scenario === 'rollback'
   const events = [
-    { icon: Clock3, tone: 'neutral', title: 'Bluehost availability finding recorded', description: 'Two homepage checks were missed at 8:15 AM and 8:20 AM. The finding did not establish downtime.', time: 'August 3 · 8:20 AM', detail: 'Source: existing Bluehost checks · Before Maintenance Manager activation' },
-    ...(state.activated ? [{ icon: Eye, tone: 'success', title: 'Availability monitoring established', description: 'No additional missed checks since activation. The two earlier missed checks did not recur.', time: 'August 3 · 10:01 AM', detail: 'Agreement: site-specific monitoring · Availability checked every 5 minutes' }] : []),
+    ...(state.activated ? [{ icon: Eye, tone: 'success', title: 'Availability monitoring established', description: 'Maintenance Manager is checking the website every five minutes. The latest check completed successfully.', time: 'August 3 · 10:01 AM', detail: 'Agreement: site-specific monitoring · Latest successful check: 10:50 AM' }] : []),
     ...(rollback ? [
       { icon: CircleAlert, tone: 'warning', title: 'Contact-form update failed verification', description: 'The website remained available, but the request-a-quote test failed after the update.', time: 'August 3 · 10:10 AM', detail: 'Authorized by: automatic agreement · Technical detail: plugin 5.8.1 → 5.8.2' },
       { icon: RotateCcw, tone: 'success', title: 'Backup restored and site recovered', description: 'The previous version was restored. Availability and all customer-contact-path checks passed again.', time: 'August 3 · 10:12 AM', detail: 'Active recovery: 2 minutes · Original update remains unresolved' },
@@ -554,8 +543,6 @@ export function ResultsPage() {
         <div className="results-score"><span><Check /></span><div><strong>Current evidence looks good</strong><p>Availability and every detected customer-contact path have recent checks.</p></div></div>
         <div className="results-metrics"><div><strong>{completed}</strong><span>Changes completed<br />and verified</span></div><div><strong>{pending}</strong><span>Decisions<br />waiting</span></div><div><strong>0</strong><span>Troubleshooting steps<br />required from you</span></div></div>
       </section>
-      <div className="availability-disposition"><Info /><p><strong>The two pre-activation missed checks have not recurred.</strong> Availability checks have completed since activation. The missed checks at 8:15 AM and 8:20 AM did not establish downtime.</p></div>
-
       <section className="results-section"><div className="results-section__heading"><div><p className="eyebrow">Current coverage</p><h2>Website and important pages</h2></div><span>Fresh evidence</span></div><div className="result-status-grid"><article><Globe2 /><h3>Website availability</h3><strong>Available</strong><span>10:50 AM · Every 5 minutes</span></article>{['Home', 'Services', 'Contact'].map((page) => <article key={page}><FileText /><h3>{page}</h3><strong>Loaded successfully</strong><span>10:45 AM · Every hour</span></article>)}</div></section>
       <section className="results-section"><div className="results-section__heading"><div><p className="eyebrow">Customer paths</p><h2>Ways customers reach you</h2></div><span>Latest verifiable result</span></div><div className="contact-result-grid"><article><Send /><h3>Request a quote</h3><ul><li><Check />Submitted</li><li><Check />Recorded</li><li className={quoteComplete ? '' : 'result-warning'}>{quoteComplete ? <Check /> : <CircleAlert />}{quoteComplete ? 'Delivered' : 'Delivery needs decision'}</li></ul><span>Latest test: August 10 · 9:10 AM</span></article><article><Mail /><h3>General contact</h3><ul><li><Check />Submitted</li><li><Check />Recorded</li><li><Check />Delivered</li></ul><span>Latest test: August 10 · 9:05 AM</span></article><article><Phone /><h3>Call the business</h3><ul><li><Check />Expected number present</li><li><Check />Phone action opens</li></ul><span>Latest check: August 10 · 9:05 AM</span></article></div></section>
       <section className="results-section"><div className="results-section__heading"><div><p className="eyebrow">Work and decisions</p><h2>What changed this week</h2></div><Link to={`${MM}/activity`}>View all activity</Link></div>
@@ -636,7 +623,7 @@ export function WeeklySummaryPage() {
       <main className="email-shell">
         <div className="email-brand"><span className="brand-symbol"><span>b</span></span><strong>bluehost</strong></div>
         <div className="email-subject"><span>Weekly summary</span><h1>Harbor &amp; Pine’s weekly Maintenance Manager summary</h1><p>August 3–10, 2026 · harborandpinelandscaping.com</p></div>
-        <section className="email-availability"><span><Check /></span><div><h2>Your website is available</h2><p>Availability checks have completed since activation. The two pre-activation missed checks have not recurred and did not establish downtime.</p></div></section>
+        <section className="email-availability"><span><Check /></span><div><h2>Your website is available</h2><p>The latest availability check passed at 10:50 AM. Maintenance Manager checks every five minutes.</p></div></section>
         <section className="email-section"><h2>Customer paths</h2><div className="email-checks"><div><CheckCircle2 /><span><strong>Request a quote</strong><small>{quoteComplete ? 'Submitted, recorded, and delivered' : 'Submitted and recorded · delivery needs your decision'}</small></span></div><div><CheckCircle2 /><span><strong>General contact</strong><small>Submitted, recorded, and delivered</small></span></div><div><CheckCircle2 /><span><strong>Phone links</strong><small>Expected business number present</small></span></div></div></section>
         <section className="email-section"><h2>This week</h2><div className="email-stats"><div><strong>{completed}</strong><span>{completed === 1 ? 'change' : 'changes'} completed and verified</span></div><div><strong>{quoteComplete ? 1 : deferred ? 1 : state.agreement === 'approval' ? 2 : 1}</strong><span>{quoteComplete ? 'owner decision resolved' : 'decision needs attention'}</span></div><div><strong>0</strong><span>troubleshooting steps required from you</span></div></div>{deferred && <div className="email-decision"><Clock3 /><div><strong>Quote-request delivery · Reminder set · Due today</strong><span>Current destination remains harborandpine@gmail.com.</span></div></div>}</section>
         <Button onClick={() => navigate(`${MM}/results`)}>View results in Bluehost <ArrowRight /></Button>

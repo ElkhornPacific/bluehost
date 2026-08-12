@@ -20,8 +20,9 @@ describe('Maintenance Manager prototype', () => {
     const user = userEvent.setup()
     renderRoute('/portal')
 
-    expect(screen.getByRole('heading', { name: /has two items that need attention/i })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: /has one item that needs attention/i })).toBeInTheDocument()
     expect(screen.getByText('Found by Bluehost')).toBeInTheDocument()
+    expect(screen.queryByText(/missed.*availability checks/i)).not.toBeInTheDocument()
 
     await user.click(screen.getByRole('button', { name: 'Not now' }))
     expect(screen.getByText('No changes were made. You can bring it back whenever you’re ready.')).toBeInTheDocument()
@@ -43,6 +44,8 @@ describe('Maintenance Manager prototype', () => {
 
     expect(screen.getByRole('heading', { name: 'Approve the waiting contact-form update' })).toBeInTheDocument()
     expect(screen.getByText('Maintenance Manager is waiting for approval before making changes.')).toBeInTheDocument()
+    expect(screen.getByText('The latest availability check completed successfully.')).toBeInTheDocument()
+    expect(screen.queryByText(/missed.*check/i)).not.toBeInTheDocument()
     expect(screen.queryByRole('heading', { name: 'Contact-form software updated' })).not.toBeInTheDocument()
   })
 
@@ -56,6 +59,7 @@ describe('Maintenance Manager prototype', () => {
     await user.click(screen.getByRole('link', { name: 'Results' }))
     expect(screen.getByText(/Current destination remains harborandpine@gmail.com/)).toBeInTheDocument()
     expect(screen.getByText('Reminder set · Due today')).toBeInTheDocument()
+    expect(screen.queryByText(/pre-activation missed/i)).not.toBeInTheDocument()
     expect(screen.queryByText('New requests go to the verified business mailbox.')).not.toBeInTheDocument()
   })
 
