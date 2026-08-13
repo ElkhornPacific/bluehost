@@ -48,7 +48,7 @@ describe('Maintenance Manager prototype', () => {
     renderRoute('/ai-agents/maintenance-manager/setup/agreement')
 
     expect(screen.getByRole('heading', { name: 'Routine maintenance will happen automatically' })).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: 'Will handle automatically' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Authorized without asking' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Protection and notifications stay the same' })).toBeInTheDocument()
 
     await user.click(screen.getByRole('radio', { name: /Watch and ask before every change/i }))
@@ -56,7 +56,7 @@ describe('Maintenance Manager prototype', () => {
     expect(screen.getByRole('heading', { name: 'Every website change waits for you' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Keeps watching' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Asks before every change' })).toBeInTheDocument()
-    expect(screen.queryByRole('heading', { name: 'Will handle automatically' })).not.toBeInTheDocument()
+    expect(screen.queryByRole('heading', { name: 'Authorized without asking' })).not.toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Protection and notifications stay the same' })).toBeInTheDocument()
   })
 

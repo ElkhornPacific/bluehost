@@ -297,7 +297,7 @@ export function AgreementPage() {
         </div>
         {state.agreement === 'automatic' ? (
           <div className="boundary-grid">
-            <section><h3><CheckCircle2 /> Will handle automatically</h3><p>Small updates to software your site already uses, like the waiting contact-form update.</p><small>Never new software, a major update, or anything customers can see.</small></section>
+            <section><h3><CheckCircle2 /> Authorized without asking</h3><p>Small updates to software your site already uses, like the waiting contact-form update.</p><small>Never new software, a major update, or anything customers can see.</small></section>
             <section><h3><KeyRound /> Always asks you</h3><p>Visible content or design, form destinations, customer data, purchases, hosting settings, new or removed software, and irreversible changes.</p></section>
           </div>
         ) : (
