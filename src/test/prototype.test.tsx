@@ -60,6 +60,16 @@ describe('Maintenance Manager prototype', () => {
     expect(screen.getByRole('heading', { name: 'Protection and notifications stay the same' })).toBeInTheDocument()
   })
 
+  it('distinguishes website availability from the selected pages checked hourly', () => {
+    renderRoute('/ai-agents/maintenance-manager/overview')
+
+    expect(screen.getByText('Website availability')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Pages checked hourly' })).toBeInTheDocument()
+    expect(screen.getByText('Home, Services, and Contact loaded successfully.')).toBeInTheDocument()
+    expect(screen.getByText('3 selected pages · Last checked 10:45 AM · Every hour')).toBeInTheDocument()
+    expect(screen.queryByText(/All three important pages/i)).not.toBeInTheDocument()
+  })
+
   it('activates monitoring-only mode without claiming the plugin update was handled', async () => {
     const user = userEvent.setup()
     renderRoute('/ai-agents/maintenance-manager/setup/agreement')

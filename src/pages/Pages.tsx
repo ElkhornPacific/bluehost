@@ -199,7 +199,7 @@ export function IntroPage() {
       </section>
 
       <section className="promise-grid" aria-label="Maintenance Manager boundaries">
-        <article><span><Eye /></span><h2>What it watches</h2><p>Availability, important pages, software maintenance, forms, and phone links.</p></article>
+        <article><span><Eye /></span><h2>What it watches</h2><p>Website availability, selected pages, software maintenance, forms, and phone links.</p></article>
         <article><span><Wrench /></span><h2>What it can handle</h2><p>Small updates to software your site already uses—only with your chosen permission.</p></article>
         <article><span><KeyRound /></span><h2>What always needs you</h2><p>Customer-facing changes, business settings, new software, purchases, and irreversible work.</p></article>
         <article><span><ShieldCheck /></span><h2>How it keeps work safe</h2><p>Back up, make the change, verify the result, restore if needed, and involve Bluehost support.</p></article>
@@ -227,7 +227,7 @@ export function IntroPage() {
 
 const coverageItems = [
   { icon: Globe2, title: 'Website availability', detail: 'Checked every 5 minutes' },
-  { icon: FileText, title: 'Important pages', detail: 'Home, Services, and Contact · Checked hourly' },
+  { icon: FileText, title: 'Selected pages', detail: 'Home, Services, and Contact · Checked hourly' },
   { icon: Wrench, title: 'Software maintenance', detail: 'Checked daily' },
 ]
 
@@ -241,7 +241,7 @@ export function CoveragePage() {
   const { state, dispatch } = usePrototype()
   return (
     <div className="page page--narrow">
-      <SetupHeader step="1 of 3 · What we'll watch" title="We found the important parts of your site" description="Our recommended coverage is already selected. Review it—there’s no technical setup." />
+      <SetupHeader step="1 of 3 · What we'll watch" title="We found pages and customer paths to monitor" description="Our recommended coverage is already selected. Review it—there’s no technical setup." />
       <section className="setup-section">
         <div className="setup-section__heading"><h2>Website basics</h2><StatusPill tone="success">3 selected</StatusPill></div>
         <div className="selection-list">
@@ -302,7 +302,7 @@ export function AgreementPage() {
           </div>
         ) : (
           <div className="boundary-grid">
-            <section><h3><Eye /> Keeps watching</h3><p>Availability, important pages, forms, phone links, and software maintenance.</p><small>Monitoring continues without changing your website.</small></section>
+            <section><h3><Eye /> Keeps watching</h3><p>Website availability, selected pages, forms, phone links, and software maintenance.</p><small>Monitoring continues without changing your website.</small></section>
             <section><h3><KeyRound /> Asks before every change</h3><p>Even small routine updates, including the waiting contact-form update.</p><small>No website change runs until you approve it.</small></section>
           </div>
         )}
@@ -354,7 +354,7 @@ export function ReviewPage() {
       <SetupHeader step="3 of 3 · Review and turn on" title="Review before Maintenance Manager starts" description="Nothing changes until you turn on this site-specific working agreement." />
       <section className="review-card">
         <div className="review-row"><span>Working agreement</span><strong>{state.agreement === 'automatic' ? 'Watch and handle routine maintenance' : 'Watch and ask before every change'}</strong><Link to={`${MM}/setup/agreement`}>Change</Link></div>
-        <div className="review-row"><span>Coverage</span><strong>Availability, 3 pages, software, and 3 contact paths</strong><Link to={`${MM}/setup/coverage`}>Change</Link></div>
+        <div className="review-row"><span>Coverage</span><strong>Website availability, 3 selected pages, software, and 3 contact paths</strong><Link to={`${MM}/setup/coverage`}>Change</Link></div>
         <div className="review-row"><span>Notifications</span><strong>Decisions now · everything else weekly</strong></div>
       </section>
       <section className="immediate-work">
@@ -393,7 +393,7 @@ export function ReviewPage() {
 }
 
 const watchingCards = [
-  { title: 'Home, Services, and Contact', description: 'All three important pages loaded successfully.', meta: 'Last checked 10:45 AM · Every hour' },
+  { title: 'Pages checked hourly', description: 'Home, Services, and Contact loaded successfully.', meta: '3 selected pages · Last checked 10:45 AM · Every hour' },
   { title: 'Request-a-quote form', description: 'Test request submitted and recorded. Delivery needs your decision.', meta: 'Last checked 10:12 AM · Daily and after changes' },
   { title: 'General contact form', description: 'Test message submitted, recorded, and delivered.', meta: 'Last checked 10:11 AM · Daily and after changes' },
   { title: 'Phone links', description: 'Links point to the expected business number.', meta: 'Last checked 10:11 AM · Daily' },
@@ -564,7 +564,7 @@ export function ResultsPage() {
         <div className="results-score"><span><Check /></span><div><strong>Current evidence looks good</strong><p>Availability and every detected customer-contact path have recent checks.</p></div></div>
         <div className="results-metrics"><div><strong>{completed}</strong><span>Changes completed<br />and verified</span></div><div><strong>{pending}</strong><span>Decisions<br />waiting</span></div><div><strong>0</strong><span>Troubleshooting steps<br />required from you</span></div></div>
       </section>
-      <section className="results-section"><div className="results-section__heading"><div><p className="eyebrow">Current coverage</p><h2>Website and important pages</h2></div><span>Fresh evidence</span></div><div className="result-status-grid"><article><Globe2 /><h3>Website availability</h3><strong>Available</strong><span>10:50 AM · Every 5 minutes</span></article>{['Home', 'Services', 'Contact'].map((page) => <article key={page}><FileText /><h3>{page}</h3><strong>Loaded successfully</strong><span>10:45 AM · Every hour</span></article>)}</div></section>
+      <section className="results-section"><div className="results-section__heading"><div><p className="eyebrow">Current coverage</p><h2>Website and selected pages</h2></div><span>Fresh evidence</span></div><div className="result-status-grid"><article><Globe2 /><h3>Website availability</h3><strong>Available</strong><span>10:50 AM · Every 5 minutes</span></article>{['Home', 'Services', 'Contact'].map((page) => <article key={page}><FileText /><h3>{page}</h3><strong>Loaded successfully</strong><span>10:45 AM · Every hour</span></article>)}</div></section>
       <section className="results-section"><div className="results-section__heading"><div><p className="eyebrow">Customer paths</p><h2>Ways customers reach you</h2></div><span>Latest verifiable result</span></div><div className="contact-result-grid"><article><Send /><h3>Request a quote</h3><ul><li><Check />Submitted</li><li><Check />Recorded</li><li className={quoteComplete ? '' : 'result-warning'}>{quoteComplete ? <Check /> : <CircleAlert />}{quoteComplete ? 'Delivered' : 'Delivery needs decision'}</li></ul><span>Latest test: August 10 · 9:10 AM</span></article><article><Mail /><h3>General contact</h3><ul><li><Check />Submitted</li><li><Check />Recorded</li><li><Check />Delivered</li></ul><span>Latest test: August 10 · 9:05 AM</span></article><article><Phone /><h3>Call the business</h3><ul><li><Check />Expected number present</li><li><Check />Phone action opens</li></ul><span>Latest check: August 10 · 9:05 AM</span></article></div></section>
       <section className="results-section"><div className="results-section__heading"><div><p className="eyebrow">Work and decisions</p><h2>What changed this week</h2></div><Link to={`${MM}/activity`}>View all activity</Link></div>
         <div className="results-work-list">
