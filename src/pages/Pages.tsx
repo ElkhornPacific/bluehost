@@ -659,9 +659,9 @@ export function RecoveryPage() {
     <div className="page page--narrow">
       <Breadcrumb current="Recovery" />
       <PageHeading eyebrow="In progress" title="Verification failed. Restoring the backup." description="The update finished, but the request-a-quote test failed. Maintenance Manager is returning the site to its previous version." />
-      <section className="recovery-live" aria-live="polite"><span className="progress-spinner" /><div><strong>Your website is still available</strong><p>The quote form is the affected path. The task will not be marked handled.</p></div></section>
+      <section className="recovery-live" aria-live="polite"><span className="progress-spinner" /><div><strong>Your website is still available</strong><p>The quote form is the affected path. Recovery is automatic and will continue if you leave this page.</p></div></section>
       <section className="verification-card"><h2>What happened</h2><ul><li><CheckCircle2 /><span><strong>Contact-form update installed</strong><small>Authorized by the automatic working agreement.</small></span></li><li><CheckCircle2 /><span><strong>Website availability passed</strong><small>The public site remained available.</small></span></li><li className="failed-check"><CircleAlert /><span><strong>Request-a-quote test failed</strong><small>The form did not pass after the update.</small></span></li><li><RefreshCcw /><span><strong>Backup restoration started</strong><small>Returning to the last verified version.</small></span></li></ul></section>
-      <ActionRow><Button onClick={() => dispatch({ type: 'set-recovery', step: 'restored' })}>Finish restoring backup</Button><Button variant="secondary" onClick={() => navigate(`${MM}/activity`)}>View recovery activity</Button></ActionRow>
+      <ActionRow><Button variant="secondary" onClick={() => navigate(`${MM}/activity`)}>View recovery activity</Button></ActionRow>
     </div>
   )
 }

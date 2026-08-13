@@ -103,6 +103,17 @@ export function PrototypeProvider({ children }: { children: ReactNode }) {
     sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state))
   }, [state])
 
+  useEffect(() => {
+    if (state.recoveryStep !== 'failed') return
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const recoveryTimer = window.setTimeout(() => {
+      dispatch({ type: 'set-recovery', step: 'restored' })
+    }, reducedMotion ? 80 : 1800)
+
+    return () => window.clearTimeout(recoveryTimer)
+  }, [state.recoveryStep])
+
   const value = useMemo(() => ({ state, dispatch }), [state])
   return <PrototypeContext.Provider value={value}>{children}</PrototypeContext.Provider>
 }

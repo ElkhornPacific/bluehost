@@ -166,9 +166,10 @@ describe('Maintenance Manager prototype', () => {
     await user.click(screen.getByRole('button', { name: 'Turn on Maintenance Manager' }))
     await user.click(await screen.findByRole('button', { name: 'View recovery status' }, { timeout: 5000 }))
     expect(screen.getByRole('heading', { name: 'Verification failed. Restoring the backup.' })).toBeInTheDocument()
+    expect(screen.getByText(/Recovery is automatic and will continue if you leave this page\./)).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: 'Finish restoring backup' })).not.toBeInTheDocument()
 
-    await user.click(screen.getByRole('button', { name: 'Finish restoring backup' }))
-    expect(screen.getByRole('heading', { name: 'Your site is working normally again' })).toBeInTheDocument()
+    expect(await screen.findByRole('heading', { name: 'Your site is working normally again' }, { timeout: 3000 })).toBeInTheDocument()
     await user.click(screen.getByRole('button', { name: 'Ask Bluehost support to review' }))
 
     expect(screen.getByText('#BH-10482')).toBeInTheDocument()
@@ -181,7 +182,7 @@ describe('Maintenance Manager prototype', () => {
     expect(screen.getByText(/nothing is waiting for you/i)).toBeInTheDocument()
     await user.click(screen.getByRole('button', { name: 'View progress' }))
     expect(screen.getByRole('heading', { name: 'Bluehost support is reviewing the update' })).toBeVisible()
-  })
+  }, 10000)
 
   it('completes progress quickly when reduced motion is preferred', async () => {
     vi.mocked(window.matchMedia).mockImplementation((query: string) => ({
