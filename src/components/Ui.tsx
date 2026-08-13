@@ -1,5 +1,5 @@
-import type { ReactNode } from 'react'
-import { Check, ChevronRight, CircleAlert, Clock3, Eye, ShieldCheck } from 'lucide-react'
+import { useId, useState, type ReactNode } from 'react'
+import { Check, ChevronDown, ChevronRight, CircleAlert, Clock3, Eye, ShieldCheck } from 'lucide-react'
 
 export function Button({
   children,
@@ -51,21 +51,46 @@ export function SiteContext() {
   )
 }
 
-export function WorkSection({ icon, title, count, children, tone = 'neutral' }: {
+export function WorkSection({ icon, title, count, children, tone = 'neutral', status, collapsible = false, expanded, onExpandedChange, sectionId }: {
   icon?: ReactNode
   title: string
   count?: number
   children: ReactNode
   tone?: 'neutral' | 'warning' | 'success' | 'info'
+  status?: ReactNode
+  collapsible?: boolean
+  expanded?: boolean
+  onExpandedChange?: (expanded: boolean) => void
+  sectionId?: string
 }) {
+  const generatedId = useId()
+  const [internalExpanded, setInternalExpanded] = useState(false)
+  const isExpanded = collapsible ? (expanded ?? internalExpanded) : true
+  const baseId = sectionId ?? `work-section-${generatedId.replace(/:/g, '')}`
+  const headingId = `${baseId}-heading`
+  const contentId = `${baseId}-content`
+
+  function toggleExpanded() {
+    const next = !isExpanded
+    if (expanded === undefined) setInternalExpanded(next)
+    onExpandedChange?.(next)
+  }
+
   return (
-    <section className={`work-section work-section--${tone}`}>
+    <section id={baseId} className={`work-section work-section--${tone} ${collapsible && !isExpanded ? 'work-section--collapsed' : ''}`} aria-labelledby={headingId}>
       <header className="work-section__header">
         <span className="work-section__icon">{icon}</span>
-        <h2>{title}</h2>
+        <h2 id={headingId}>{title}</h2>
         {typeof count === 'number' && <span className="count-badge" aria-label={`${count} items`}>{count}</span>}
+        {status && <span className="work-section__status">{status}</span>}
+        {collapsible && (
+          <button className="work-section__toggle" type="button" aria-expanded={isExpanded} aria-controls={contentId} onClick={toggleExpanded} onKeyDown={(event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); toggleExpanded() } }}>
+            <span className="sr-only">{isExpanded ? 'Collapse' : 'Expand'} {title}</span>
+            <ChevronDown aria-hidden="true" />
+          </button>
+        )}
       </header>
-      <div className="work-section__body">{children}</div>
+      <div id={contentId} className="work-section__body" hidden={collapsible && !isExpanded}>{children}</div>
     </section>
   )
 }

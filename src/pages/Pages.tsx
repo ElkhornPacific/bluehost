@@ -403,35 +403,70 @@ const watchingCards = [
 export function OverviewPage() {
   const { state } = usePrototype()
   const navigate = useNavigate()
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({})
   const rollback = state.scenario === 'rollback'
   const support = state.recoveryStep === 'ticket'
   const recoveryDecision = rollback && ['restored', 'reminded'].includes(state.recoveryStep)
   const quoteResolved = state.quoteStatus === 'resolved'
   const quoteDeferred = state.quoteStatus === 'deferred'
+  const recoveryRunning = rollback && state.recoveryStep === 'failed'
+  const decisionCount = (state.agreement === 'approval' ? 1 : 0) + (!rollback && !quoteResolved ? 1 : 0) + (recoveryDecision ? 1 : 0)
+  const handledCount = !rollback && state.agreement === 'automatic' ? (quoteResolved ? 2 : 1) : 0
+  const overallTone = support || recoveryRunning ? 'info' : decisionCount ? 'warning' : 'success'
+  const overallTitle = support ? 'Bluehost is handling this' : recoveryRunning ? 'Recovery is in progress' : decisionCount === 1 ? 'One decision needs you' : decisionCount > 1 ? `${decisionCount} decisions need you` : 'All clear'
+  const overallDescription = support
+    ? 'Your website is available. Bluehost support is reviewing one update, and nothing is waiting for you.'
+    : recoveryRunning
+      ? 'Your website is available. Maintenance Manager is restoring the last verified version, and nothing is waiting for you.'
+      : decisionCount
+        ? `${decisionCount === 1 ? 'A decision is' : `${decisionCount} decisions are`} waiting. Your website is available and current checks are healthy.`
+        : 'Nothing is waiting for you. Your website is available and current checks are healthy.'
+  const OverallIcon = overallTone === 'success' ? CheckCircle2 : overallTone === 'warning' ? CircleAlert : RefreshCcw
+
+  function setSectionExpanded(section: string, expanded: boolean) {
+    setExpandedSections((current) => ({ ...current, [section]: expanded }))
+  }
+
+  function openPrioritySection() {
+    setSectionExpanded(support || recoveryRunning ? 'progress' : 'decisions', true)
+  }
 
   return (
     <div className="page">
       <Breadcrumb current="Overview" />
       <PageHeading title="Your site at a glance" description="Current decisions, verified work, and the evidence Maintenance Manager is watching." actions={<StatusPill tone="success">Active</StatusPill>} />
+      <section className={`overview-status overview-status--${overallTone}`} aria-labelledby="overview-status-title" aria-live="polite">
+        <span className="overview-status__icon"><OverallIcon aria-hidden="true" /></span>
+        <div className="overview-status__content">
+          <p className="eyebrow">Overall status</p>
+          <h2 id="overview-status-title">{overallTitle}</h2>
+          <p>{overallDescription}</p>
+          <div className="overview-status__facts" aria-label="Current website status">
+            <span><Globe2 aria-hidden="true" /> Website available</span>
+            <span>{recoveryRunning ? <RefreshCcw aria-hidden="true" /> : <Eye aria-hidden="true" />} {recoveryRunning ? 'Recovery underway' : 'Checks current'}</span>
+          </div>
+        </div>
+        {(decisionCount > 0 || support || recoveryRunning) && <Button variant={overallTone === 'warning' ? 'primary' : 'secondary'} onClick={openPrioritySection}>{decisionCount > 0 ? `Review ${decisionCount} decision${decisionCount === 1 ? '' : 's'}` : 'View progress'}</Button>}
+      </section>
       <div className="agreement-banner"><ShieldCheck /><span><strong>Working agreement:</strong> {state.agreement === 'automatic' ? 'Watch and handle routine maintenance' : 'Watch and ask before every change'}</span><Link to={`${MM}/settings`}>View settings</Link></div>
 
-      {support && <WorkSection title="In progress" count={1} tone="info" icon={<RefreshCcw />}><WorkCard title="Bluehost support is reviewing the update" description="Ticket #BH-10482 · Your site and customer-contact paths are working normally." meta="No action is required from you right now." onClick={() => navigate(`${MM}/recovery`)} /></WorkSection>}
+      {(support || recoveryRunning) && <WorkSection sectionId="overview-progress" title="In progress" tone="info" icon={<RefreshCcw />} status={<StatusPill tone="info">{support ? 'Bluehost handling' : 'Recovery underway'}</StatusPill>} collapsible expanded={Boolean(expandedSections.progress)} onExpandedChange={(expanded) => setSectionExpanded('progress', expanded)}>{support ? <WorkCard title="Bluehost support is reviewing the update" description="Ticket #BH-10482 · Your site and customer-contact paths are working normally." meta="No action is required from you right now." onClick={() => navigate(`${MM}/recovery`)} /> : <WorkCard title="Restoring the last verified version" description="The quote-request check failed after the update. Maintenance Manager is restoring the backup." meta="No action is required while recovery runs." onClick={() => navigate(`${MM}/recovery`)} />}</WorkSection>}
 
-      <WorkSection title="Needs your decision" count={(state.agreement === 'approval' ? 1 : 0) + (!rollback && !quoteResolved ? 1 : 0) + (recoveryDecision ? 1 : 0)} tone="warning" icon={<CircleAlert />}>
+      <WorkSection sectionId="overview-decisions" title="Needs your decision" tone={decisionCount ? 'warning' : 'success'} icon={decisionCount ? <CircleAlert /> : <CheckCircle2 />} status={<StatusPill tone={decisionCount ? 'warning' : 'success'}>{decisionCount ? `${decisionCount} waiting` : 'None waiting'}</StatusPill>} collapsible expanded={Boolean(expandedSections.decisions)} onExpandedChange={(expanded) => setSectionExpanded('decisions', expanded)}>
         {state.agreement === 'approval' && !rollback && <WorkCard title="Approve the waiting contact-form update" description="The site is being watched. No backup or website change has run." meta="Waiting since August 3 · Small update to existing software" />}
         {!rollback && !quoteResolved && <WorkCard title="Where should new quote requests go?" description="Your site records new requests, but delivery to the current address could not be confirmed." meta={quoteDeferred ? 'Reminder set · Due August 10' : 'Recommended address is ready to review'} status={<StatusPill tone="warning">{quoteDeferred ? 'Reminder set' : 'Decision needed'}</StatusPill>} onClick={() => navigate(`${MM}/decisions/quote-delivery`)} />}
         {recoveryDecision && <WorkCard title="Contact-form update still pending" description="The previous version was restored and the site works normally again. Support review is recommended before another attempt." meta={state.recoveryStep === 'reminded' ? 'Try-again reminder set' : 'Recovered at 10:12 AM'} onClick={() => navigate(`${MM}/recovery`)} />}
         {quoteResolved && state.agreement === 'automatic' && !recoveryDecision && <EmptyState>No decisions are waiting. You’re all caught up.</EmptyState>}
       </WorkSection>
 
-      <WorkSection title="Handled for you" count={!rollback && state.agreement === 'automatic' ? (quoteResolved ? 2 : 1) : 0} tone="success" icon={<CheckCircle2 />}>
+      <WorkSection sectionId="overview-handled" title="Handled for you" tone={handledCount ? 'success' : 'neutral'} icon={<CheckCircle2 />} status={<StatusPill tone={handledCount ? 'success' : 'neutral'}>{handledCount ? `${handledCount} verified` : state.agreement === 'approval' ? 'Waiting for approval' : 'None completed'}</StatusPill>} collapsible expanded={Boolean(expandedSections.handled)} onExpandedChange={(expanded) => setSectionExpanded('handled', expanded)}>
         {!rollback && state.agreement === 'automatic' ? <>
           {quoteResolved && <WorkCard title="Quote-request delivery updated" description="New requests now go to hello@harborandpinelandscaping.com. Submission, recording, and delivery passed." meta="August 3 · 10:14–10:20 AM · 6 minutes" status={<StatusPill tone="success">Verified</StatusPill>} onClick={() => navigate(`${MM}/activity`)} />}
           <WorkCard title="Contact-form software updated" description="The site and affected customer paths passed verification." meta="August 3 · 10:02–10:10 AM · 8 minutes" status={<StatusPill tone="success">Verified</StatusPill>} onClick={() => navigate(`${MM}/activity`)} />
         </> : <EmptyState>{rollback ? 'The failed update was restored, not handled. Its recovery remains in Activity.' : 'Maintenance Manager is waiting for approval before making changes.'}</EmptyState>}
       </WorkSection>
 
-      <WorkSection title="Watching for you" count={6} tone="info" icon={<Eye />}>
+      <WorkSection sectionId="overview-watching" title="Watching for you" tone="success" icon={<Eye />} status={<StatusPill tone="success">6 current</StatusPill>} collapsible expanded={Boolean(expandedSections.watching)} onExpandedChange={(expanded) => setSectionExpanded('watching', expanded)}>
         <WorkCard title="Website availability" description="The latest availability check completed successfully." meta="Available · Last checked 10:50 AM · Every 5 minutes" status={<StatusPill tone="success">Current</StatusPill>} />
         <div className="watching-grid">
           {watchingCards.map((card) => <WorkCard key={card.title} {...card} status={<StatusPill tone="success">Current</StatusPill>} />)}

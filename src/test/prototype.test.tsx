@@ -60,14 +60,41 @@ describe('Maintenance Manager prototype', () => {
     expect(screen.getByRole('heading', { name: 'Protection and notifications stay the same' })).toBeInTheDocument()
   })
 
-  it('distinguishes website availability from the selected pages checked hourly', () => {
+  it('distinguishes website availability from the selected pages checked hourly', async () => {
+    const user = userEvent.setup()
     renderRoute('/ai-agents/maintenance-manager/overview')
 
+    expect(screen.getByRole('heading', { name: 'One decision needs you' })).toBeInTheDocument()
+    expect(screen.getByText(/Your website is available and current checks are healthy/)).toBeInTheDocument()
+    expect(screen.getByText('1 waiting')).toBeInTheDocument()
+    expect(screen.getByText('1 verified')).toBeInTheDocument()
+    expect(screen.getByText('6 current')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Expand Needs your decision' })).toHaveAttribute('aria-expanded', 'false')
+    expect(screen.getByRole('button', { name: 'Expand Handled for you' })).toHaveAttribute('aria-expanded', 'false')
+    expect(screen.getByRole('button', { name: 'Expand Watching for you' })).toHaveAttribute('aria-expanded', 'false')
+    expect(screen.getByText('Where should new quote requests go?')).not.toBeVisible()
+
+    await user.click(screen.getByRole('button', { name: 'Expand Watching for you' }))
     expect(screen.getByText('Website availability')).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Pages checked hourly' })).toBeInTheDocument()
     expect(screen.getByText('Home, Services, and Contact loaded successfully.')).toBeInTheDocument()
     expect(screen.getByText('3 selected pages · Last checked 10:45 AM · Every hour')).toBeInTheDocument()
     expect(screen.queryByText(/All three important pages/i)).not.toBeInTheDocument()
+  })
+
+  it('expands and collapses Overview sections with labeled controls', async () => {
+    const user = userEvent.setup()
+    renderRoute('/ai-agents/maintenance-manager/overview')
+
+    await user.click(screen.getByRole('button', { name: 'Review 1 decision' }))
+    expect(screen.getByRole('button', { name: 'Collapse Needs your decision' })).toHaveAttribute('aria-expanded', 'true')
+    expect(screen.getByText('Where should new quote requests go?')).toBeVisible()
+
+    const collapseToggle = screen.getByRole('button', { name: 'Collapse Needs your decision' })
+    collapseToggle.focus()
+    await user.keyboard('{Enter}')
+    expect(screen.getByRole('button', { name: 'Expand Needs your decision' })).toHaveAttribute('aria-expanded', 'false')
+    expect(screen.getByText('Where should new quote requests go?')).not.toBeVisible()
   })
 
   it('activates monitoring-only mode without claiming the plugin update was handled', async () => {
@@ -81,8 +108,12 @@ describe('Maintenance Manager prototype', () => {
     await user.click(screen.getByRole('button', { name: 'Turn on Maintenance Manager' }))
     await user.click(await screen.findByRole('button', { name: /View Maintenance Manager/i }, { timeout: 5000 }))
 
+    expect(screen.getByRole('heading', { name: '2 decisions need you' })).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: 'Review 2 decisions' }))
     expect(screen.getByRole('heading', { name: 'Approve the waiting contact-form update' })).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: 'Expand Handled for you' }))
     expect(screen.getByText('Maintenance Manager is waiting for approval before making changes.')).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: 'Expand Watching for you' }))
     expect(screen.getByText('The latest availability check completed successfully.')).toBeInTheDocument()
     expect(screen.queryByText(/missed.*check/i)).not.toBeInTheDocument()
     expect(screen.queryByRole('heading', { name: 'Contact-form software updated' })).not.toBeInTheDocument()
@@ -114,6 +145,19 @@ describe('Maintenance Manager prototype', () => {
     expect(screen.getByText(/restored the current destination/i)).toBeInTheDocument()
   })
 
+  it('shows an all-clear Overview after the final decision is resolved', async () => {
+    const user = userEvent.setup()
+    renderRoute('/ai-agents/maintenance-manager/decisions/quote-delivery')
+
+    await user.click(screen.getByRole('button', { name: 'Use recommended email' }))
+    await user.click(await screen.findByRole('button', { name: 'Return to overview' }, { timeout: 3000 }))
+
+    expect(screen.getByRole('heading', { name: 'All clear' })).toBeInTheDocument()
+    expect(screen.getByText('Nothing is waiting for you. Your website is available and current checks are healthy.')).toBeInTheDocument()
+    expect(screen.getByText('None waiting')).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: /Review .*decision/i })).not.toBeInTheDocument()
+  })
+
   it('completes the rollback and pre-populated support handoff branch', async () => {
     const user = userEvent.setup()
     renderRoute('/portal')
@@ -131,6 +175,12 @@ describe('Maintenance Manager prototype', () => {
     const ticket = screen.getByRole('heading', { name: 'Context sent to Bluehost support' }).parentElement!
     expect(within(ticket).getByText('Failed request-a-quote test')).toBeInTheDocument()
     expect(screen.getByText('No action is required from you right now.')).toBeInTheDocument()
+
+    await user.click(screen.getByRole('link', { name: 'Overview' }))
+    expect(screen.getByRole('heading', { name: 'Bluehost is handling this' })).toBeInTheDocument()
+    expect(screen.getByText(/nothing is waiting for you/i)).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: 'View progress' }))
+    expect(screen.getByRole('heading', { name: 'Bluehost support is reviewing the update' })).toBeVisible()
   })
 
   it('completes progress quickly when reduced motion is preferred', async () => {
